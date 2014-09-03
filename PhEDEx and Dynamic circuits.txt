@@ -1,0 +1,19 @@
+PhEDEx is the data-placement management tool for the CMS experiment at the LHC. 
+It manages the scheduling of all large-scale WAN transfers in CMS, ensuring 
+reliable delivery of the data. 
+
+It consists of several components: an Oracle database, a website/data-service, 
+a set of central agents and a set of site agents (at each of the PhEDEx sites).
+
+PhEDEx maintains knowledge and history of transfer performance, and the central 
+agents use that information to choose among source replicas when a user makes a request
+The central agents then queue the transfer to be processed by the site agents. 
+PhEDEx operates in a data-pull mode, the destination site pulls the data to itself
+when it is ready. 
+
+For our purposes in this paper, we're interested in the FileDownload. It's one of 
+the site-agent, meaning, each site runs one or more copies of this agent. It is responsible
+for the actual execution of file-transfers; it retrieves the transfer queue from
+ the database, organises the files in whatever way is suitable for the actual 
+ transfer tool that will be used, launches the transfer, monitors its progress,
+ verifies the files have been delivered, and reports the transfer results via the database.
